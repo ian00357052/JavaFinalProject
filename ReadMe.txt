@@ -1,1 +1,2 @@
 Weapon是模擬OOPS裡面四面八方而來的武器，所寫的"最初的"JAVA檔
+JavaRPG是主遊戲檔案
