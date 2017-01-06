@@ -36,13 +36,13 @@ public class MenuState extends GameState {
 		
 		g.drawImage(bg, 0, 0, null);
 		
-		Content.drawString(g, options[0], 65, 90);
-		Content.drawString(g, options[1], 65, 100);
-		Content.drawString(g, options[2], 65, 110);
+		Content.drawString(g, options[0], 60, 90);
+		Content.drawString(g, options[1], 60, 100);
+		Content.drawString(g, options[2], 60, 110);
 		
-		if(currentOption == 0) g.drawImage(diamond, 50, 86, null);
-		else if(currentOption == 1) g.drawImage(diamond, 50, 96, null);
-		else if(currentOption == 2)	g.drawImage(diamond,50,106,null);
+		if(currentOption == 0) g.drawImage(diamond, 45, 86, null);
+		else if(currentOption == 1) g.drawImage(diamond, 45, 96, null);
+		else if(currentOption == 2)	g.drawImage(diamond,45,106,null);
 		
 	}
 	
@@ -59,6 +59,7 @@ public class MenuState extends GameState {
 			JukeBox.play("collect");
 			selectOption();
 		}
+		
 	}
 	
 	private void selectOption() {

@@ -15,8 +15,8 @@ public class Hud {
 	private int yoffset;
 	
 	private BufferedImage bar;
-	private BufferedImage boat;
-	private BufferedImage axe;
+	private BufferedImage flash;
+	private BufferedImage recover;
 	
 	private Player player;
 	
@@ -32,12 +32,11 @@ public class Hud {
 		yoffset = GamePanel.HEIGHT;
 		
 		bar = Content.BAR[0][0];
-		boat = Content.ITEMS[0][0];
-		axe = Content.ITEMS[0][1];
+		flash = Content.ITEMS[0][0];
+		recover = Content.ITEMS[0][1];
 		
 		font = new Font("Arial", Font.PLAIN, 10);
 		textColor = new Color(47, 64, 126);
-		
 	}
 	
 	public void draw(Graphics2D g) {
@@ -58,8 +57,8 @@ public class Hud {
 		else g.drawString("HP", 75, yoffset+12);
 		
 		// draw items
-		if(player.hasBoat()) g.drawImage(boat, 100, yoffset, null);
-		if(player.hasAxe()) g.drawImage(axe, 112, yoffset, null);
+		if(player.getItemFlash()) g.drawImage(flash, 100, yoffset, null);
+		if(player.getItemRecovery()) g.drawImage(recover, 112, yoffset, null);
 		
 		// draw time
 		int minutes = (int) (player.getTicks() / 1800);

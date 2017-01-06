@@ -1,5 +1,5 @@
 // Possibly redundant subclass of Entity.
-// There are two types of items: Axe and boat.
+// There are two types of items: Recover and Flash.
 // Upon collection, informs the Player
 // that the Player does indeed have the item.
 
@@ -12,8 +12,8 @@ public class Item extends Entity{
 	
 	private BufferedImage sprite;
 	private int type;
-	public static final int BOAT = 0;
-	public static final int AXE = 1;
+	public static final int Flash = 0;
+	public static final int Recover = 1;
 	
 	public Item(TileMap tm) {
 		super(tm);
@@ -24,20 +24,20 @@ public class Item extends Entity{
 	
 	public void setType(int i) {
 		type = i;
-		if(type == BOAT) {
+		if(type == Flash) {
 			sprite = Content.ITEMS[1][0];
 		}
-		else if(type == AXE) {
+		else if(type == Recover) {
 			sprite = Content.ITEMS[1][1];
 		}
 	}
 	
 	public void collected(Player p) {
-		if(type == BOAT) {
-			p.gotBoat();
+		if(type == Flash) {
+			p.addItemFlash();
 		}
-		if(type == AXE) {
-			p.gotAxe();
+		if(type == Recover) {
+			p.addItemRecovery();
 		}
 	}
 	

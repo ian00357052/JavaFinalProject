@@ -70,10 +70,10 @@ public class PlayState extends GameState {
 		
 		// create player
 		player = new Player(tileMap);
-		
+		player.reset();
 		// fill lists
 		//populateDiamond();
-		//populateItems();
+		populateItems();
 		putMissile();
 		
 		// initialize player
@@ -90,8 +90,8 @@ public class PlayState extends GameState {
 		hud = new Hud(player, diamonds);
 		
 		// load music
-		JukeBox.load("/Music/bgmusic.mp3", "music1");
-		JukeBox.setVolume("music1", -10);
+		JukeBox.load("/Music/bgmusic1.mp3", "music1");
+		JukeBox.setVolume("music1", -5);
 		JukeBox.loop("music1", 1000, 1000, JukeBox.getFrames("music1") - 1000);
 		JukeBox.load("/Music/finish.mp3", "finish");
 		JukeBox.setVolume("finish", -10);
@@ -114,7 +114,7 @@ public class PlayState extends GameState {
 		Missile weapon = null;
 		Random random = new Random();
 		int wall = random.nextInt(4); //0是左壁,1是下壁,2是右壁,3是上壁
-		int hole = random.nextInt(7);
+		int hole = random.nextInt(8);
 		switch(wall)
 		{
 		//向右
@@ -154,12 +154,12 @@ public class PlayState extends GameState {
 		Item item;
 		
 		item = new Item(tileMap);
-		item.setType(Item.AXE);
+		item.setType(Item.Flash);
 		item.setTilePosition(3, 3);
 		items.add(item);
 		
 		item = new Item(tileMap);
-		item.setType(Item.BOAT);
+		item.setType(Item.Recover);
 		item.setTilePosition(4, 4);
 		items.add(item);
 		
@@ -170,7 +170,7 @@ public class PlayState extends GameState {
 		count++;
 		if(count % 30 == 0)
 		{
-			for(int i = 0;i < 15;i++)
+			for(int i = 0;i < 1;i++)
 				putMissile();
 		}
 		
@@ -257,8 +257,6 @@ public class PlayState extends GameState {
 		// update player
 		player.update();
 		
-		
-		
 		// update sparkles
 		for(int i = 0; i < sparkles.size(); i++) {
 			Sparkle s = sparkles.get(i);
@@ -270,9 +268,11 @@ public class PlayState extends GameState {
 		}
 		
 		// update items
-		for(int i = 0; i < items.size(); i++) {
+		for(int i = 0; i < items.size(); i++) 
+		{
 			Item item = items.get(i);
-			if(player.intersects(item)) {
+			if(player.intersects(item)) 
+			{
 				items.remove(i);
 				i--;
 				item.collected(player);
@@ -334,6 +334,29 @@ public class PlayState extends GameState {
 		if(Keys.isDown(Keys.UP)) player.setUp();
 		if(Keys.isDown(Keys.DOWN)) player.setDown();
 		if(Keys.isPressed(Keys.SPACE)) player.setAction();
+		if(Keys.isPressed(Keys.Q))
+		{
+			if(player.getItemRecovery() || player.getCheatMode()){
+				JukeBox.play("collect");
+				Sparkle s = new Sparkle(tileMap);
+				s.setPosition(player.getx(), player.gety());
+				sparkles.add(s);
+			}
+			player.useFlash();
+		}
+		if(Keys.isPressed(Keys.E)){
+			
+			if(player.getItemRecovery() || player.getCheatMode()){
+				JukeBox.play("collect");
+				Sparkle s = new Sparkle(tileMap);
+				s.setPosition(player.getx(), player.gety());
+				sparkles.add(s);
+			}
+			player.recover();
+		}
+		if(Keys.isPressed(Keys.Q) && Keys.isPressed(Keys.E) && Keys.isPressed(Keys.LEFT) && Keys.isPressed(Keys.RIGHT))
+			player.setCheatMode();
+		
 	}
 	
 	//===============================================

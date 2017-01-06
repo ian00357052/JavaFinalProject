@@ -8,6 +8,7 @@ package ntou.cs.Java2016.FinalProject;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 public class Player extends Entity {
 	
@@ -45,15 +46,15 @@ public class Player extends Entity {
 	private int hpPoint;//hp點數
 	private int recoveryRate;//回復點數
 	private int speedPoint;//速度點數
-	private Boolean shieldUsing;//使用護盾
+	private boolean shieldUsing;//使用護盾
 	private String playerName;//玩家名稱
 	//道具控制
-	private Boolean itemFlash;
-	private Boolean itemShield;
-	private Boolean itemRecovery;
+	private boolean itemFlash;
+	private boolean itemRecovery;
 	
+	private Random random = new Random();
 	
-	
+	private boolean cheatMode;
 	
 	public Player(TileMap tm) {
 		
@@ -89,9 +90,9 @@ public class Player extends Entity {
 		shieldUsing = false;
 		itemFlash = false;
 		itemRecovery = false;
-		itemShield = false;
 		hpPoint = 0;
 		
+		cheatMode = false;
 	}
 	public Player(TileMap tm,int skillPoint,int recoveryRate,int speedPoint,int hpPoint) {
 		
@@ -127,9 +128,9 @@ public class Player extends Entity {
 		shieldUsing = false;
 		itemFlash = false;
 		itemRecovery = false;
-		itemShield = false;
 		this.hpPoint = hpPoint;
 		
+		cheatMode = false;
 	}
 	
 	private void setAnimation(int i, BufferedImage[] bi, int d) {
@@ -273,13 +274,10 @@ public class Player extends Entity {
 		return face;
 	}
 	*/
-	public Boolean getItemFlash() {
+	public boolean getItemFlash() {
 		return itemFlash;
 	}
-	public Boolean getItemShield() {
-		return itemShield;
-	}
-	public Boolean getItemRecovery() {
+	public boolean getItemRecovery() {
 		return itemRecovery;
 	}
 	
@@ -318,7 +316,7 @@ public class Player extends Entity {
 		//y = 5;
 		//coordinate.setLocation(start);
 		//face = Direct.DOWN;
-		hp = 8 + hpPoint;
+		hp = 10 + hpPoint;
 		shieldUsing = false;
 		moveSpeed = 2 + speedPoint;
 	}
@@ -334,52 +332,39 @@ public class Player extends Entity {
 	//增加道具瞬移
 	public void addItemFlash()
 	{
-		if(!itemFlash) itemFlash = true;
-	}
-	//增加道具護盾
-	public void addItemShield()
-	{
-		if(!itemShield) itemShield = true;
+		itemFlash = true;
 	}
 	//增加道具回血
 	public void addItemRecovery()
 	{
-		if(itemRecovery) itemRecovery = true;
+		itemRecovery = true;
 	}
 	//使用道具
 	//使用道具瞬移
 	public void useFlash()
 	{
-		//x = 1 + random.nextInt(8);
-		//y = 1 + random.nextInt(8);
-		if(itemFlash)
+		
+		if(itemFlash || cheatMode)
 		{
-			//coordinate.move(1 + random.nextInt(8), 1 + random.nextInt(8));
+			
+			setTilePosition(1 + random.nextInt(8), 1 + random.nextInt(8));
+			
 			itemFlash = false;
-		}
-	}
-	//使用道具護盾
-	public void useShield()
-	{
-		if(itemShield)
-		{
-			shieldUsing = true;
-			itemShield = false;
 		}
 	}
 	//使用道具回血
 	public void recover()
 	{
-		if(itemRecovery)
+		if(itemRecovery || cheatMode)
 		{
-			addCurrentHP(hp/2);
+			addCurrentHP(5);
 			itemRecovery = false;
 		}
 	}
 	//增加hp
 	public void addCurrentHP(int recover)
 	{
-		if((hp + recover) > (8 + hpPoint )) hp = 8 + hpPoint; 
+		if((hp + recover) > (10 + hpPoint )) hp = 10 + hpPoint; 
 		else hp += recover;
 	}
 	
@@ -395,4 +380,12 @@ public class Player extends Entity {
 		return hp;
 	}
 	
+	public void setCheatMode()
+	{
+		cheatMode = true;
+	}
+	public boolean getCheatMode()
+	{
+		return cheatMode;
+	}
 }
