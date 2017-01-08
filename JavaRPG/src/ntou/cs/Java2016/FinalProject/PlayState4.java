@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 
 
 
-public class PlayState2 extends GameState {
+public class PlayState4 extends GameState {
 	
 	// player
 	private Player player ;
@@ -59,7 +59,7 @@ public class PlayState2 extends GameState {
 	// transition box
 	private ArrayList<Rectangle> boxes;
 	private String fileName;
-	public PlayState2(GameStateManager gsm) {
+	public PlayState4(GameStateManager gsm) {
 		super(gsm);
 	}
 	public void read(String fileName,Player player){

@@ -2,7 +2,6 @@ package ntou.cs.Java2016.FinalProject;
 
 
 
-
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.io.BufferedReader;
@@ -17,7 +16,7 @@ import javax.swing.JOptionPane;
 
 
 
-public class PlayState2 extends GameState {
+public class PlayState3 extends GameState {
 	
 	// player
 	private Player player ;
@@ -59,7 +58,7 @@ public class PlayState2 extends GameState {
 	// transition box
 	private ArrayList<Rectangle> boxes;
 	private String fileName;
-	public PlayState2(GameStateManager gsm) {
+	public PlayState3(GameStateManager gsm) {
 		super(gsm);
 	}
 	public void read(String fileName,Player player){

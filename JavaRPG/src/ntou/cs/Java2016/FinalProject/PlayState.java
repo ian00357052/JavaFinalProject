@@ -135,28 +135,28 @@ public class PlayState extends GameState {
 		//向右
 		case 0:
 			direct = Direct.Right;
-			weapon = new Missile(tileMap,1, hole+1, 0, direct);
+			weapon = new Missile(tileMap,0, hole+1, 0, direct);
 			weapon.setTilePosition(0, hole+1);
 			missile.add(weapon);
 			break;
 		//向上
 		case 1:
 			direct = Direct.Up;
-			weapon = new Missile(tileMap,hole+1, 8, 0, direct);
+			weapon = new Missile(tileMap,hole+1, 9, 0, direct);
 			weapon.setTilePosition(hole+1, 9);
 			missile.add(weapon);
 			break;
 		//向左
 		case 2:
 			direct = Direct.Left;
-			weapon = new Missile(tileMap,8, hole+1, 0, direct);
+			weapon = new Missile(tileMap,9, hole+1, 0, direct);
 			weapon.setTilePosition(9, hole+1);
 			missile.add(weapon);
 			break;
 		//向下
 		case 3:
 			direct = Direct.Down;
-			weapon = new Missile(tileMap,hole+1, 1, 0, direct);
+			weapon = new Missile(tileMap,hole+1, 0, 0, direct);
 			weapon.setTilePosition(hole+1, 0);
 			missile.add(weapon);
 			break;
