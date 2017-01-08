@@ -18,14 +18,20 @@ public class GameStateManager {
 	private int currentState;
 	private int previousState;
 	
-	public static final int NUM_STATES = 5;
+	public static final int NUM_STATES = 10;
 	public static final int INTRO = 0;
 	public static final int MENU = 1;
 	public static final int PLAY = 2;
 	public static final int GAMEOVER = 3;
 	public static final int GAMEOVERDEAD = 4;
+	public static final int SAVE = 5;
+	public static final int LOAD = 6;
+	public static final int PLAY2 = 7;
+	public static final int PLAY3 = 8;
+	public static final int PLAY4 = 9;
 	
-	public GameStateManager() {
+	public GameStateManager() 
+	{
 		
 		JukeBox.init();
 		
@@ -37,27 +43,44 @@ public class GameStateManager {
 		
 	}
 	
-	public void setState(int i) {
+	public void setState(int i) 
+	{
 		previousState = currentState;
 		unloadState(previousState);
 		currentState = i;
-		if(i == INTRO) {
+		if(i == INTRO) 
+		{
 			gameStates[i] = new IntroState(this);
 			gameStates[i].init();
 		}
-		else if(i == MENU) {
+		else if(i == MENU) 
+		{
 			gameStates[i] = new MenuState(this);
 			gameStates[i].init();
 		}
 		else if(i == PLAY) {
+			
 			gameStates[i] = new PlayState(this);
 			gameStates[i].init();
 		}
-		else if(i == GAMEOVER) {
+		else if(i == GAMEOVER) 
+		{
 			gameStates[i] = new GameOverState(this);
 			gameStates[i].init();
-		}else if(i == GAMEOVERDEAD) {
+		}
+		else if(i == GAMEOVERDEAD) 
+		{
 			gameStates[i] = new GameOverStateDead(this);
+			gameStates[i].init();
+		}
+		else if(i == LOAD)
+		{
+			gameStates[i] = new LoadState(this);
+			gameStates[i].init();
+		}
+		else if(i == PLAY2)
+		{
+			gameStates[i] = new PlayState2(this);
 			gameStates[i].init();
 		}
 	}

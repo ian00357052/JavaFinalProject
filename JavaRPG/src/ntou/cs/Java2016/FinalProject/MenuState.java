@@ -62,13 +62,22 @@ public class MenuState extends GameState {
 		
 	}
 	
-	private void selectOption() {
-		if(currentOption == 0) {
+	private void selectOption() 
+	{
+		if(currentOption == 0) 
+		{
 			gsm.setState(GameStateManager.PLAY);
 		}
-		if(currentOption == 2) {
+		if(currentOption == 1) 
+		{
+			gsm.setState(GameStateManager.LOAD);
+			
+		}
+		if(currentOption == 2) 
+		{
 			System.exit(0);
 		}
+		
 	}
 	
 }

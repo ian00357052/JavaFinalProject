@@ -1,12 +1,13 @@
-// The main playing GameState.
-// Contains everything you need for gameplay:
-// Player, TileMap, Diamonds, etc.
-// Updates and draws all game objects.
-
 package ntou.cs.Java2016.FinalProject;
+
+
+
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,10 +15,12 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
-public class PlayState extends GameState {
+
+
+public class PlayState2 extends GameState {
 	
 	// player
-	private Player player;
+	private Player player ;
 	
 	// tilemap
 	private TileMap tileMap;
@@ -51,45 +54,62 @@ public class PlayState extends GameState {
 	private boolean eventStart;
 	private boolean eventFinish;
 	private int eventTick;
-	
-	//for save and load
 	public static String charName = "";
 	public String MyCharName; 
-	
 	// transition box
 	private ArrayList<Rectangle> boxes;
-	
-	public PlayState(GameStateManager gsm) {
+	private String fileName;
+	public PlayState2(GameStateManager gsm) {
 		super(gsm);
 	}
-	
-	public void init() {
-		//set player's name
-		MyCharName = JOptionPane.showInputDialog("Please enter the name of your character."); 
-		if (MyCharName != null) 
-		{
-			charName = MyCharName;
+	public void read(String fileName,Player player){
+		String b = "saves\\"+fileName+".txt";	
+		int i=0;
+		String[] a = {"","","","",""};
+		try {
+		      FileReader fr=new FileReader(b);
+		      BufferedReader br=new BufferedReader(fr);
+		      String line;
+		      while ((line=br.readLine()) != null) {
+		    	  a[i]= line;
+		     
+		        i++;
+		        }	    
+		      int temp1 = Integer.valueOf(a[0]);
+		      int temp2 = Integer.valueOf(a[1]);
+		      int temp3 = Integer.valueOf(a[2]);
+		      int temp4 = Integer.valueOf(a[3]);
+		      int temp5 = Integer.valueOf(a[4]);
+			 	player.setStage(temp1);		
+				player.setSkillPoint(temp2);
+				player.setHpPoint(temp3);		
+				player.setRecoveryRate(temp4);	
+				player.setSpeedPoint(temp5);
+			
+		      }
+		    catch (IOException e) {System.out.println(e);}
+		    
 		}
+		
+	public void init() {
 		
 		// create lists
 		diamonds = new ArrayList<Diamond>();
 		missile = new ArrayList<Missile>();
 		sparkles = new ArrayList<Sparkle>();
-		items = new ArrayList<Item>();
-		
+		items = new ArrayList<Item>();		
 		// load map
 		tileMap = new TileMap(16);
 		tileMap.loadTiles("/Tilesets/testtileset.gif");
-		tileMap.loadMap("/Maps/testmap.map");
-		
+		tileMap.loadMap("/Maps/testmap.map");	
 		// create player
+		//read(LoadState.getFileName(),player);
 		player = new Player(tileMap);
-		player.reset();
-		player.setName(MyCharName);
+		read("0106",player);
 		// fill lists
 		//populateDiamond();
-		populateItems();
-		putMissile();
+		//populateItems();
+		//putMissile();
 		
 		// initialize player
 		player.setTilePosition(5, 5);
@@ -105,8 +125,8 @@ public class PlayState extends GameState {
 		hud = new Hud(player, diamonds);
 		
 		// load music
-		JukeBox.load("/Music/bgmusic1.mp3", "music1");
-		JukeBox.setVolume("music1", -5);
+		JukeBox.load("/Music/bgmusic.mp3", "music1");
+		JukeBox.setVolume("music1", -10);
 		JukeBox.loop("music1", 1000, 1000, JukeBox.getFrames("music1") - 1000);
 		JukeBox.load("/Music/finish.mp3", "finish");
 		JukeBox.setVolume("finish", -10);
@@ -129,7 +149,7 @@ public class PlayState extends GameState {
 		Missile weapon = null;
 		Random random = new Random();
 		int wall = random.nextInt(4); //0是左壁,1是下壁,2是右壁,3是上壁
-		int hole = random.nextInt(8);
+		int hole = random.nextInt(7);
 		switch(wall)
 		{
 		//向右
@@ -164,7 +184,8 @@ public class PlayState extends GameState {
 		
 	}
 	
-	private void populateItems() {
+	private void populateItems() 
+	{
 		
 		Item item;
 		
@@ -185,7 +206,7 @@ public class PlayState extends GameState {
 		count++;
 		if(count % 30 == 0)
 		{
-			for(int i = 0;i < 1;i++)
+			for(int i = 0;i < 4;i++)
 				putMissile();
 		}
 		
@@ -272,6 +293,8 @@ public class PlayState extends GameState {
 		// update player
 		player.update();
 		
+		
+		
 		// update sparkles
 		for(int i = 0; i < sparkles.size(); i++) {
 			Sparkle s = sparkles.get(i);
@@ -283,11 +306,9 @@ public class PlayState extends GameState {
 		}
 		
 		// update items
-		for(int i = 0; i < items.size(); i++) 
-		{
+		for(int i = 0; i < items.size(); i++) {
 			Item item = items.get(i);
-			if(player.intersects(item)) 
-			{
+			if(player.intersects(item)) {
 				items.remove(i);
 				i--;
 				item.collected(player);
@@ -338,8 +359,7 @@ public class PlayState extends GameState {
 		
 	}
 	
-	public void SaveFiles(String name,int stage,int skillPoint,int hpPoint,int recoveryRate,int speedPoint) 
-	{
+	public void SaveFiles(String name,int stage,int skillPoint,int hpPoint,int recoveryRate,int speedPoint) {
 		String mStage = Integer.toString(stage);
 		String mSkillPoint = Integer.toString(skillPoint);
 		String mHpPoint = Integer.toString(hpPoint);
@@ -363,11 +383,14 @@ public class PlayState extends GameState {
 			e.printStackTrace();
 		}
 	}
-	
 	public void handleInput() {
 		if(Keys.isPressed(Keys.ESCAPE)) {
 			JukeBox.stop("music1");
 			gsm.setPaused(true);
+		}
+		if(Keys.isPressed(Keys.F2)) {
+			
+			SaveFiles(MyCharName, player.getStage(),player.getSkillPoint(),player.getHpPoint(),player.getRecoveryRate(),player.getSpeedPoint());
 		}
 		if(blockInput) return;
 		if(Keys.isDown(Keys.LEFT)) player.setLeft();
@@ -400,11 +423,6 @@ public class PlayState extends GameState {
 		}
 		if(Keys.isPressed(Keys.Q) && Keys.isPressed(Keys.E) && Keys.isPressed(Keys.LEFT) && Keys.isPressed(Keys.RIGHT))
 			player.setCheatMode();
-		if(Keys.isPressed(Keys.F2)) 
-		{
-			
-			SaveFiles(MyCharName, player.getStage(),player.getSkillPoint(),player.getHpPoint(),player.getRecoveryRate(),player.getSpeedPoint());
-		}
 	}
 	
 	//===============================================

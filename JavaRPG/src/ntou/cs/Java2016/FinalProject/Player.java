@@ -41,6 +41,7 @@ public class Player extends Entity {
 	private long ticks;
 	
 	//add
+	private int stage;//關卡
 	private int hp;//血量
 	private int skillPoint;//能力點
 	private int hpPoint;//hp點數
@@ -251,7 +252,30 @@ public class Player extends Entity {
 		super.draw(g);
 	}
 	
-	//add	
+	//set var
+	public void setName(String name){
+		playerName = name;
+	}
+	public void setStage(int s){
+		stage = s;
+	}
+	public void setSkillPoint(int s){
+		skillPoint = s;
+	}
+	public void setHpPoint(int s){
+		hpPoint = s;
+	}
+	public void setRecoveryRate(int s){
+		recoveryRate = s;
+	}
+	public void setSpeedPoint(int s){
+		speedPoint = s;
+	}
+	
+	//add
+	public int getStage() {
+		return stage;
+	}
 	public int getSkillPoint() {
 		return skillPoint;
 	}
