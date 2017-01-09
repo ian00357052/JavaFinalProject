@@ -479,7 +479,7 @@ public class PlayState4 extends GameState {
 			{
 				if(player.getHP() != 0)
 				{
-					gsm.setState(GameStateManager.GAMEOVER4);
+					gsm.setState(GameStateManager.Level4);
 				}
 				else
 				{
