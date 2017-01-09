@@ -431,7 +431,7 @@ public class PlayState extends GameState {
 		eventTick++;
 		if(eventTick == 1) {
 			boxes.clear();
-			for(int i = 0; i < 9; i++) {
+			for(int i = 0; i < 11; i++) {
 				if(i % 2 == 0) boxes.add(new Rectangle(-128, i * 16, GamePanel.WIDTH, 16));
 				else boxes.add(new Rectangle(128, i * 16, GamePanel.WIDTH, 16));
 			}
@@ -450,9 +450,16 @@ public class PlayState extends GameState {
 			}
 		}
 		if(eventTick > 33) {
-			if(!JukeBox.isPlaying("finish")) {
-				Data.setTime(player.getTicks());
-				gsm.setState(GameStateManager.GAMEOVER);
+			if(!JukeBox.isPlaying("finish")) 
+			{
+				if(player.getTicks() == 0)
+				{
+					gsm.setState(GameStateManager.GAMEOVER);
+				}
+				else
+				{
+					gsm.setState(GameStateManager.GAMEOVERDEAD);
+				}
 			}
 		}
 	}

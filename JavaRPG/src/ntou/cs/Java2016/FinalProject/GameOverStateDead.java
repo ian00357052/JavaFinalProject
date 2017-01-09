@@ -25,7 +25,8 @@ public class GameOverStateDead extends GameState {
 		g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT2);
 		
 		Content.drawString(g, "Game Over", 40, 36);
-		Content.drawString(g, "press any key to menu", 4, 110);
+		Content.drawString(g, "press any key", 30, 110);
+		Content.drawString(g, "to menu", 30, 140);
 		
 	}
 	
