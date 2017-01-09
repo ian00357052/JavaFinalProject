@@ -17,6 +17,7 @@ public class Hud {
 	private BufferedImage bar;
 	private BufferedImage flash;
 	private BufferedImage recover;
+	private BufferedImage cheat;
 	
 	private Player player;
 	
@@ -34,6 +35,7 @@ public class Hud {
 		bar = Content.BAR[0][0];
 		flash = Content.ITEMS[0][0];
 		recover = Content.ITEMS[0][1];
+		cheat = Content.CHEAT[0][0];
 		
 		font = new Font("Arial", Font.PLAIN, 10);
 		textColor = new Color(47, 64, 126);
@@ -74,7 +76,7 @@ public class Hud {
 		}
 		
 		//draw CHEATMODE
-		if(player.getItemFlash()) g.drawImage(flash, 124, yoffset, null);
+		if(player.getCheatMode()) g.drawImage(cheat, 128, yoffset, null);
 		
 		
 	}
