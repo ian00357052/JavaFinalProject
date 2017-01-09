@@ -452,7 +452,7 @@ public class PlayState extends GameState {
 		if(eventTick > 33) {
 			if(!JukeBox.isPlaying("finish")) 
 			{
-				if(player.getTicks() == 0)
+				if(player.getHP() != 0)
 				{
 					gsm.setState(GameStateManager.GAMEOVER);
 				}

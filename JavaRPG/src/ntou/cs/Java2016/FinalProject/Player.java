@@ -81,7 +81,7 @@ public class Player extends Entity {
 		
 		animation.setFrames(downSprites);
 		animation.setDelay(10);
-		ticks = 30*60; //60是秒數
+		ticks = 30*5; //60是秒數
 		//add
 		hp = 10;
 		skillPoint = 5;

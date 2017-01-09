@@ -67,11 +67,14 @@ public class Hud {
 			if(seconds < 10) Content.drawString(g, "0" + minutes + ":0" + seconds, 85, 3);
 			else Content.drawString(g, "0" + minutes + ":" + seconds, 85, 3);
 		}
-		else {
+		else 
+		{
 			if(seconds < 10) Content.drawString(g, minutes + ":0" + seconds, 85, 3);
 			else Content.drawString(g, minutes + ":" + seconds, 85, 3);
 		}
 		
+		//draw CHEATMODE
+		if(player.getItemFlash()) g.drawImage(flash, 124, yoffset, null);
 		
 		
 	}

@@ -188,17 +188,23 @@ public class PlayState4 extends GameState {
 		
 		item = new Item(tileMap);
 		item.setType(Item.Flash);
-		item.setTilePosition(3, 3);
+		item.setTilePosition(3, 8);
 		items.add(item);
 		
 		item = new Item(tileMap);
 		item.setType(Item.Recover);
-		item.setTilePosition(4, 4);
+		item.setTilePosition(5, 8);
 		items.add(item);
 		
 	}
 	
 	public void update() {
+		//放道具
+		if(player.getTicks() == 30*40 || player.getTicks() == 30*20)
+		{
+			this.populateItems();
+		}
+				
 		//計數，每到10的倍數就產生一顆飛彈
 		count++;
 		if(count % 30 == 0)
@@ -471,9 +477,9 @@ public class PlayState4 extends GameState {
 		if(eventTick > 33) {
 			if(!JukeBox.isPlaying("finish")) 
 			{
-				if(player.getTicks() == 0)
+				if(player.getHP() != 0)
 				{
-					gsm.setState(GameStateManager.GAMEOVER);
+					gsm.setState(GameStateManager.GAMEOVER4);
 				}
 				else
 				{
