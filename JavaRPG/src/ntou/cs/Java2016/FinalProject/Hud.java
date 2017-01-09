@@ -25,7 +25,7 @@ public class Hud {
 	private Font font;
 	private Color textColor; 
 	
-	public Hud(Player p, ArrayList<Diamond> d) {
+	public Hud(Player p) {
 		
 		player = p;
 		HP = p.getHP();
@@ -48,7 +48,7 @@ public class Hud {
 		g.setColor(textColor);
 		g.fillRect(8, yoffset + 6, (int)(28.0 * player.getHP() / HP), 4);
 		
-		// draw diamond amount
+		// draw HP amount
 		g.setColor(textColor);
 		g.setFont(font);
 		String s = player.getHP() + "/" + HP;

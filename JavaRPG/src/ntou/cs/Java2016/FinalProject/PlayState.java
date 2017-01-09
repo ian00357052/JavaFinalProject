@@ -21,10 +21,7 @@ public class PlayState extends GameState {
 	
 	// tilemap
 	private TileMap tileMap;
-	
-	// diamonds
-	private ArrayList<Diamond> diamonds;
-	
+
 	// Missiles
 	private Direct direct;
 	private ArrayList<Missile> missile = null;
@@ -72,7 +69,6 @@ public class PlayState extends GameState {
 		}
 		
 		// create lists
-		diamonds = new ArrayList<Diamond>();
 		missile = new ArrayList<Missile>();
 		sparkles = new ArrayList<Sparkle>();
 		items = new ArrayList<Item>();
@@ -102,7 +98,7 @@ public class PlayState extends GameState {
 		tileMap.setPositionImmediately(-xsector * sectorSize, -ysector * sectorSize);
 		
 		// load hud
-		hud = new Hud(player, diamonds);
+		hud = new Hud(player);
 		
 		// load music
 		JukeBox.load("/Music/bgmusic1.mp3", "music1");
@@ -181,7 +177,7 @@ public class PlayState extends GameState {
 	}
 	
 	public void update() {
-		//璸计–10计碞玻ネ聋紆
+		//璸计–30计碞玻ネ聋紆
 		count++;
 		if(count % 30 == 0)
 		{
@@ -307,11 +303,7 @@ public class PlayState extends GameState {
 		
 		// draw player
 		player.draw(g);
-		
-		// draw diamonds
-		for(Diamond d : diamonds) {
-			d.draw(g);
-		}
+
 		// draw Missile
 		for(Missile m : missile) {
 					m.draw(g);

@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 public class MenuState extends GameState {
 	
 	private BufferedImage bg;
-	private BufferedImage diamond;
+	private BufferedImage point;
 	
 	private int currentOption = 0;
 	private String[] options = {
@@ -23,7 +23,7 @@ public class MenuState extends GameState {
 	
 	public void init() {
 		bg = Content.MENUBG[0][0];
-		diamond = Content.DIAMOND[0][0];
+		point = Content.POINT[0][0];
 		JukeBox.load("/SFX/collect.wav", "collect");
 		JukeBox.load("/SFX/menuoption.wav", "menuoption");
 	}
@@ -40,9 +40,9 @@ public class MenuState extends GameState {
 		Content.drawString(g, options[1], 60, 100);
 		Content.drawString(g, options[2], 60, 110);
 		
-		if(currentOption == 0) g.drawImage(diamond, 45, 86, null);
-		else if(currentOption == 1) g.drawImage(diamond, 45, 96, null);
-		else if(currentOption == 2)	g.drawImage(diamond,45,106,null);
+		if(currentOption == 0) g.drawImage(point, 45, 86, null);
+		else if(currentOption == 1) g.drawImage(point, 45, 96, null);
+		else if(currentOption == 2)	g.drawImage(point,45,106,null);
 		
 	}
 	
@@ -66,7 +66,7 @@ public class MenuState extends GameState {
 	{
 		if(currentOption == 0) 
 		{
-			gsm.setState(GameStateManager.PLAY);
+			gsm.setState(GameStateManager.Level0);
 		}
 		if(currentOption == 1) 
 		{

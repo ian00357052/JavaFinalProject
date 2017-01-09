@@ -13,7 +13,7 @@ import java.io.IOException;
 public class LoadState extends GameState {
 	
 	private BufferedImage bg;
-	private BufferedImage diamond;
+	private BufferedImage point;
 	private int currentOption = 0;
 	private String[] tempOptions;
 	private static String fileName="";
@@ -26,7 +26,7 @@ public class LoadState extends GameState {
 	
 	public void init() {
 		bg = Content.MENUBG[0][0];
-		diamond = Content.DIAMOND[0][0];
+		point = Content.POINT[0][0];
 		JukeBox.load("/SFX/collect.wav", "collect");
 		JukeBox.load("/SFX/menuoption.wav", "menuoption");
 		
@@ -73,10 +73,10 @@ public class LoadState extends GameState {
 		}
 		Content.drawString(g, options[3], 65, 120);
 		
-		if(currentOption == 0) g.drawImage(diamond, 50, 86, null);
-		else if(currentOption == 1) g.drawImage(diamond, 50, 96, null);
-		else if(currentOption == 2)	g.drawImage(diamond,50,106,null);
-		else if(currentOption == 3)	g.drawImage(diamond,50,116,null);
+		if(currentOption == 0) g.drawImage(point, 50, 86, null);
+		else if(currentOption == 1) g.drawImage(point, 50, 96, null);
+		else if(currentOption == 2)	g.drawImage(point,50,106,null);
+		else if(currentOption == 3)	g.drawImage(point,50,116,null);
 
 	}
 	

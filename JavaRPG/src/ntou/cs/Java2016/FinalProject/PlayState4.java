@@ -25,9 +25,6 @@ public class PlayState4 extends GameState {
 	// tilemap
 	private TileMap tileMap;
 	
-	// diamonds
-	private ArrayList<Diamond> diamonds;
-	
 	// Missiles
 	private Direct direct;
 	private ArrayList<Missile> missile = null;
@@ -94,14 +91,13 @@ public class PlayState4 extends GameState {
 	public void init() {
 		
 		// create lists
-		diamonds = new ArrayList<Diamond>();
 		missile = new ArrayList<Missile>();
 		sparkles = new ArrayList<Sparkle>();
 		items = new ArrayList<Item>();		
 		// load map
 		tileMap = new TileMap(16);
 		tileMap.loadTiles("/Tilesets/testtileset.gif");
-		tileMap.loadMap("/Maps/testmap.map");	
+		tileMap.loadMap("/Maps/testmap4.map");	
 		// create player
 		
 		player = new Player(tileMap);
@@ -123,7 +119,7 @@ public class PlayState4 extends GameState {
 		tileMap.setPositionImmediately(-xsector * sectorSize, -ysector * sectorSize);
 		
 		// load hud
-		hud = new Hud(player, diamonds);
+		hud = new Hud(player);
 		
 		// load music
 		JukeBox.load("/Music/bgmusic.mp3", "music1");
@@ -150,7 +146,7 @@ public class PlayState4 extends GameState {
 		Missile weapon = null;
 		Random random = new Random();
 		int wall = random.nextInt(4); //0是左壁,1是下壁,2是右壁,3是上壁
-		int hole = random.nextInt(7);
+		int hole = random.nextInt(8);
 		switch(wall)
 		{
 		//向右
@@ -207,7 +203,7 @@ public class PlayState4 extends GameState {
 		count++;
 		if(count % 30 == 0)
 		{
-			for(int i = 0;i < 4;i++)
+			for(int i = 0;i < 7;i++)
 				putMissile();
 		}
 		
@@ -330,10 +326,6 @@ public class PlayState4 extends GameState {
 		// draw player
 		player.draw(g);
 		
-		// draw diamonds
-		for(Diamond d : diamonds) {
-			d.draw(g);
-		}
 		// draw Missile
 		for(Missile m : missile) {
 					m.draw(g);
@@ -479,7 +471,7 @@ public class PlayState4 extends GameState {
 		if(eventTick > 33) {
 			if(!JukeBox.isPlaying("finish")) {
 				Data.setTime(player.getTicks());
-				gsm.setState(GameStateManager.GAMEOVER);
+				gsm.setState(GameStateManager.Level4);
 			}
 		}
 	}
