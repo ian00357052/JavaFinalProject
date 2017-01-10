@@ -52,7 +52,6 @@ public class PlayState2 extends GameState {
 	public String MyCharName; 
 	// transition box
 	private ArrayList<Rectangle> boxes;
-	private String fileName;
 	public PlayState2(GameStateManager gsm) {
 		super(gsm);
 	}
@@ -62,6 +61,7 @@ public class PlayState2 extends GameState {
 		String[] a = {"","","","",""};
 		try {
 		      FileReader fr=new FileReader(b);
+		      @SuppressWarnings("resource")
 		      BufferedReader br=new BufferedReader(fr);
 		      String line;
 		      while ((line=br.readLine()) != null) {

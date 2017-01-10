@@ -15,7 +15,6 @@ public class LoadState extends GameState {
 	private BufferedImage bg;
 	private BufferedImage point;
 	private int currentOption = 0;
-	private String[] tempOptions;
 	private static String fileName="";
 	
 	private String[] options={"","","","back"};
@@ -108,18 +107,19 @@ public class LoadState extends GameState {
 			FileReader fr;
 			try {
 				fr = new FileReader("saves\\"+options[0]+".txt");
+				@SuppressWarnings("resource")
 				BufferedReader br = new BufferedReader(fr);
 				try {
 					int stage = Integer.valueOf(br.readLine());
 					
 					switch(stage){
-					case 2: gsm.setState(GameStateManager.PLAY2);
+					case 2: gsm.setState(GameStateManager.Level2);
 						break;
-					case 3:gsm.setState(GameStateManager.PLAY3);
+					case 3:gsm.setState(GameStateManager.Level3);
 						break;
-					case 4:gsm.setState(GameStateManager.PLAY4);
+					case 4:gsm.setState(GameStateManager.Level4);
 						break;
-					default:gsm.setState(GameStateManager.PLAY);
+					default:gsm.setState(GameStateManager.Level1);
 						break;
 					}
 				} catch (NumberFormatException e) {
@@ -139,18 +139,19 @@ public class LoadState extends GameState {
 			FileReader fr;
 			try {
 				fr = new FileReader("saves\\"+options[1]+".txt");
+				@SuppressWarnings("resource")
 				BufferedReader br = new BufferedReader(fr);
 				try {
 					int stage = Integer.valueOf(br.readLine());
 					
 					switch(stage){
-					case 2: gsm.setState(GameStateManager.PLAY2);
+					case 2: gsm.setState(GameStateManager.Level2);
 						break;
-					case 3:gsm.setState(GameStateManager.PLAY3);
+					case 3:gsm.setState(GameStateManager.Level3);
 						break;
-					case 4:gsm.setState(GameStateManager.PLAY4);
+					case 4:gsm.setState(GameStateManager.Level4);
 						break;
-					default:gsm.setState(GameStateManager.PLAY);
+					default:gsm.setState(GameStateManager.Level1);
 						break;
 					}
 					
@@ -172,18 +173,19 @@ public class LoadState extends GameState {
 			FileReader fr;
 			try {
 				fr = new FileReader("saves\\"+options[2]+".txt");
+				@SuppressWarnings("resource")
 				BufferedReader br = new BufferedReader(fr);
 				try {
 					int stage = Integer.valueOf(br.readLine());
 					
 					switch(stage){
-					case 2: gsm.setState(GameStateManager.PLAY2);
+					case 2: gsm.setState(GameStateManager.Level2);
 						break;
-					case 3:gsm.setState(GameStateManager.PLAY3);
+					case 3:gsm.setState(GameStateManager.Level3);
 						break;
-					case 4:gsm.setState(GameStateManager.PLAY4);
+					case 4:gsm.setState(GameStateManager.Level4);
 						break;
-					default:gsm.setState(GameStateManager.PLAY);
+					default:gsm.setState(GameStateManager.Level1);
 						break;
 					}
 					

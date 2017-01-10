@@ -2,8 +2,6 @@ package ntou.cs.Java2016.FinalProject;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.net.URL;
-
 import javax.swing.*;
 
 public class Level0 extends GameState implements ActionListener {
