@@ -2,6 +2,8 @@ package ntou.cs.Java2016.FinalProject;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.net.URL;
+
 import javax.swing.*;
 
 public class Level0 extends GameState implements ActionListener {
@@ -24,7 +26,6 @@ public class Level0 extends GameState implements ActionListener {
     cp.setLayout(null);
     f.setVisible(true);
     
-
     ImageIcon img = new ImageIcon("Resources/Talk/bed.jpg");
 	JLabel imgLabel = new JLabel(img);
 	f.getLayeredPane().add(imgLabel, new Integer(Integer.MIN_VALUE));
