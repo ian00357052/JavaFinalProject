@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 
@@ -16,9 +17,9 @@ public class LoadState extends GameState {
 	private BufferedImage point;
 	private int currentOption = 0;
 	private static String fileName="";
-	
-	private String[] options={"","","","back"};
-	
+	ArrayList<File> Array=new ArrayList<File>();
+	int count=0;
+	private String[] options={"","","","BACK"};
 	public LoadState(GameStateManager gsm) {
 		super(gsm);		
 	}
@@ -29,15 +30,22 @@ public class LoadState extends GameState {
 		JukeBox.load("/SFX/collect.wav", "collect");
 		JukeBox.load("/SFX/menuoption.wav", "menuoption");
 		
-		File f = new File("saves");
-		File [] f1 = f.listFiles();
-		for(int i =0;i<f.listFiles().length;i++)
-		{
-			String temp = f1[i].getName();
-			temp = temp.replace(".txt", "");
-			options[i]=temp;
-		}
+		Array=fileSort.sort(1, "saves", false);	
+		String a[] = new String[Array.size()];
+	for(int i=0;i<3;i++)
+	{	
+		a[i] = Array.get(i).toString();
 	}
+	for(int i=0;i<3;i++){
+		String temp = a[i];
+		temp = temp.replace(".txt", "");
+		temp = temp.replace("saves", "");
+		temp = temp.replace("\\", "");
+		options[i]=temp;
+	}
+	
+	}
+	
 	
 	public void update() {
 		handleInput();
@@ -93,6 +101,7 @@ public class LoadState extends GameState {
 			selectOption();
 		}
 	}
+
 	public void setFileName(int i){
 		 fileName = options[i];		
 	}

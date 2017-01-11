@@ -96,10 +96,12 @@ public class PlayState2 extends GameState {
 		tileMap.loadTiles("/Tilesets/testtileset.gif");
 		tileMap.loadMap("/Maps/testmap2.map");	
 		// create player
-		
+		MyCharName = LoadState.getFileName();
 		player = new Player(tileMap);
 		read(LoadState.getFileName(),player);
-		//read("0106",player);
+		MyCharName = LoadState.getFileName();
+		player.setName(MyCharName);
+		player.setStage(1);
 		// fill lists
 		//populateDiamond();
 		//populateItems();
@@ -197,7 +199,7 @@ public class PlayState2 extends GameState {
 	
 	public void update() {
 		//©ñ¹D¨ã
-		if(player.getTicks() == 30*53)
+		if(player.getTicks() == 30*25)
 		{
 			this.populateItems();
 		}
@@ -354,7 +356,17 @@ public class PlayState2 extends GameState {
 		}
 		
 	}
-	
+	public void clearFile(String name)
+    {
+	 String filePath = name+".txt";
+        try{
+            java.io.File file = new java.io.File("saves\\"+filePath);
+            java.io.FileWriter fw = new java.io.FileWriter(file, false);
+            fw.flush(); fw.close();
+        }catch(Exception e){
+            //
+        }
+    }
 	public void SaveFiles(String name,int stage,int skillPoint,int hpPoint,int recoveryRate,int speedPoint) {
 		String mStage = Integer.toString(stage);
 		String mSkillPoint = Integer.toString(skillPoint);
@@ -385,7 +397,7 @@ public class PlayState2 extends GameState {
 			gsm.setPaused(true);
 		}
 		if(Keys.isPressed(Keys.F2)) {
-			
+			clearFile(MyCharName);
 			SaveFiles(MyCharName, player.getStage(),player.getSkillPoint(),player.getHpPoint(),player.getRecoveryRate(),player.getSpeedPoint());
 		}
 		if(blockInput) return;

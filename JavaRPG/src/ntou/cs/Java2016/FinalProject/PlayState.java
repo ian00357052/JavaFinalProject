@@ -7,6 +7,7 @@ package ntou.cs.Java2016.FinalProject;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -52,7 +53,11 @@ public class PlayState extends GameState {
 	//for save and load
 	public static String charName = "";
 	public String MyCharName; 
-	
+	public String[] files={"","","","","",""};
+	public int check = 1;
+	public int whileCheck=0;
+	public int counter=0;
+	private String tempName="";
 	// transition box
 	private ArrayList<Rectangle> boxes;
 	
@@ -62,13 +67,46 @@ public class PlayState extends GameState {
 	
 	public void init() {
 		//set player's name
-		MyCharName = JOptionPane.showInputDialog("Please enter the name of your character."); 
-		if (MyCharName != null) 
-		{
-			charName = MyCharName;
-		}
-		
+				File f = new File("saves");
+				File [] f1 = f.listFiles();
+				for(int i =0;i<f.listFiles().length;i++)
+				{
+					String temp = f1[i].getName();
+					temp = temp.replace(".txt", "");
+					files[i]=temp;
+				}	
+				tempName = JOptionPane.showInputDialog("請輸入您的大名:"); 
+					
+				//init: whileCheck=0,check=1;
+				while(whileCheck==0)
+				{
+					if(check==1)
+					{
+						for(int i =0;i<3;i++)
+						{
+							if(tempName.equals(files[i])==true)
+							{
+								check=-1;
+								break;
+							}
+							else
+								check = 0;
+						}
+					}
+					if (check==0) //if no same
+					{
+						MyCharName = tempName;
+						whileCheck=-1; //end while
+					}
+					if (check ==-1)//if same
+					{	
+						tempName = JOptionPane.showInputDialog("這個名字已經被使用過了，請再試一次"); 
+						check=1;//back to check again
+						counter=0;
+					}	
+				}
 		// create lists
+		
 		missile = new ArrayList<Missile>();
 		sparkles = new ArrayList<Sparkle>();
 		items = new ArrayList<Item>();
@@ -82,6 +120,7 @@ public class PlayState extends GameState {
 		player = new Player(tileMap);
 		player.reset();
 		player.setName(MyCharName);
+		player.setStage(0);
 		// fill lists
 		//populateDiamond();
 		populateItems();
@@ -329,7 +368,18 @@ public class PlayState extends GameState {
 		}
 		
 	}
-	
+	 public void clearFile(String name)
+	    {
+		 String filePath = name+".txt";
+	        try{
+	            java.io.File file = new java.io.File("saves\\"+filePath);
+	            java.io.FileWriter fw = new java.io.FileWriter(file, false);
+	            fw.flush(); fw.close();
+	        }catch(Exception e){
+	            //
+	        }
+	    }
+	 
 	public void SaveFiles(String name,int stage,int skillPoint,int hpPoint,int recoveryRate,int speedPoint) 
 	{
 		String mStage = Integer.toString(stage);
@@ -394,7 +444,7 @@ public class PlayState extends GameState {
 			player.setCheatMode();
 		if(Keys.isPressed(Keys.F2)) 
 		{
-			
+			clearFile(MyCharName);
 			SaveFiles(MyCharName, player.getStage(),player.getSkillPoint(),player.getHpPoint(),player.getRecoveryRate(),player.getSpeedPoint());
 		}
 	}

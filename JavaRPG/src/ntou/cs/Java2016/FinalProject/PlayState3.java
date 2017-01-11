@@ -5,14 +5,11 @@ package ntou.cs.Java2016.FinalProject;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
-
-import javax.swing.JOptionPane;
 
 
 
@@ -54,7 +51,6 @@ public class PlayState3 extends GameState {
 	public String MyCharName; 
 	// transition box
 	private ArrayList<Rectangle> boxes;
-	private String fileName;
 	public PlayState3(GameStateManager gsm) {
 		super(gsm);
 	}
@@ -64,6 +60,7 @@ public class PlayState3 extends GameState {
 		String[] a = {"","","","",""};
 		try {
 		      FileReader fr=new FileReader(b);
+		      @SuppressWarnings("resource")
 		      BufferedReader br=new BufferedReader(fr);
 		      String line;
 		      while ((line=br.readLine()) != null) {
@@ -101,6 +98,9 @@ public class PlayState3 extends GameState {
 		
 		player = new Player(tileMap);
 		read(LoadState.getFileName(),player);
+		MyCharName = LoadState.getFileName();
+		player.setName(MyCharName);
+		player.setStage(2);
 		//read("0106",player);
 		// fill lists
 		//populateDiamond();
@@ -199,7 +199,7 @@ public class PlayState3 extends GameState {
 	
 	public void update() {
 		//©ñ¹D¨ã
-		if(player.getTicks() == 30*30)
+		if(player.getTicks() == 30*20)
 		{
 			this.populateItems();
 		}
@@ -357,6 +357,17 @@ public class PlayState3 extends GameState {
 		
 	}
 	
+	public void clearFile(String name)
+    {
+	 String filePath = name+".txt";
+        try{
+            java.io.File file = new java.io.File("saves\\"+filePath);
+            java.io.FileWriter fw = new java.io.FileWriter(file, false);
+            fw.flush(); fw.close();
+        }catch(Exception e){
+            //
+        }
+    }
 	public void SaveFiles(String name,int stage,int skillPoint,int hpPoint,int recoveryRate,int speedPoint) {
 		String mStage = Integer.toString(stage);
 		String mSkillPoint = Integer.toString(skillPoint);
@@ -387,7 +398,7 @@ public class PlayState3 extends GameState {
 			gsm.setPaused(true);
 		}
 		if(Keys.isPressed(Keys.F2)) {
-			
+			clearFile(MyCharName);
 			SaveFiles(MyCharName, player.getStage(),player.getSkillPoint(),player.getHpPoint(),player.getRecoveryRate(),player.getSpeedPoint());
 		}
 		if(blockInput) return;
