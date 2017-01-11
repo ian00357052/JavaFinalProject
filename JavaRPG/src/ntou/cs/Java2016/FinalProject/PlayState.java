@@ -67,44 +67,47 @@ public class PlayState extends GameState {
 	
 	public void init() {
 		//set player's name
-				File f = new File("saves");
-				File [] f1 = f.listFiles();
-				for(int i =0;i<f.listFiles().length;i++)
+		if(Player.playerName == null)
+		{
+			File f = new File("saves");
+			File [] f1 = f.listFiles();
+			for(int i =0;i<f.listFiles().length;i++)
+			{
+				String temp = f1[i].getName();
+				temp = temp.replace(".txt", "");
+				files[i]=temp;
+			}	
+			tempName = JOptionPane.showInputDialog("請輸入您的大名:"); 
+						
+			//init: whileCheck=0,check=1;
+			while(whileCheck==0)
+			{
+				if(check==1)
 				{
-					String temp = f1[i].getName();
-					temp = temp.replace(".txt", "");
-					files[i]=temp;
-				}	
-				tempName = JOptionPane.showInputDialog("請輸入您的大名:"); 
-					
-				//init: whileCheck=0,check=1;
-				while(whileCheck==0)
-				{
-					if(check==1)
+					for(int i =0;i<3;i++)
 					{
-						for(int i =0;i<3;i++)
+						if(tempName.equals(files[i])==true)
 						{
-							if(tempName.equals(files[i])==true)
-							{
-								check=-1;
-								break;
-							}
-							else
-								check = 0;
+							check=-1;
+							break;
 						}
+						else
+							check = 0;
 					}
-					if (check==0) //if no same
-					{
-						MyCharName = tempName;
-						whileCheck=-1; //end while
-					}
-					if (check ==-1)//if same
-					{	
-						tempName = JOptionPane.showInputDialog("這個名字已經被使用過了，請再試一次"); 
-						check=1;//back to check again
-						counter=0;
-					}	
 				}
+				if (check==0) //if no same
+				{
+					MyCharName = tempName;
+					whileCheck=-1; //end while
+				}
+				if (check ==-1)//if same
+				{	
+					tempName = JOptionPane.showInputDialog("這個名字已經被使用過了，請再試一次"); 
+					check=1;//back to check again
+					counter=0;
+				}	
+			}
+		}
 		// create lists
 		
 		missile = new ArrayList<Missile>();

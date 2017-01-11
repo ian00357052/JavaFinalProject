@@ -31,18 +31,36 @@ public class LoadState extends GameState {
 		JukeBox.load("/SFX/menuoption.wav", "menuoption");
 		
 		Array=fileSort.sort(1, "saves", false);	
-		String a[] = new String[Array.size()];
-	for(int i=0;i<3;i++)
-	{	
-		a[i] = Array.get(i).toString();
-	}
-	for(int i=0;i<3;i++){
-		String temp = a[i];
-		temp = temp.replace(".txt", "");
-		temp = temp.replace("saves", "");
-		temp = temp.replace("\\", "");
-		options[i]=temp;
-	}
+		if(Array.size()>0)
+		{
+			String a[] = new String[Array.size()];
+			for(int i=0;i<Array.size();i++)
+			{	
+				a[i] = Array.get(i).toString();
+			}
+			if(Array.size() >2)
+			{
+				for(int i=0;i<3;i++)
+				{
+					String temp = a[i];
+					temp = temp.replace(".txt", "");
+					temp = temp.replace("saves", "");
+					temp = temp.replace("\\", "");
+					options[i]=temp;
+				}
+			}
+			else
+			{
+				for(int i=0;i<Array.size();i++)
+				{
+					String temp = a[i];
+					temp = temp.replace(".txt", "");
+					temp = temp.replace("saves", "");
+					temp = temp.replace("\\", "");
+					options[i]=temp;
+				}
+			}
+		}
 	
 	}
 	
@@ -122,13 +140,15 @@ public class LoadState extends GameState {
 					int stage = Integer.valueOf(br.readLine());
 					
 					switch(stage){
+					case 0:gsm.setState(GameStateManager.Level0);
+						break;
+					case 1:gsm.setState(GameStateManager.Level1);
+						break;
 					case 2: gsm.setState(GameStateManager.Level2);
 						break;
 					case 3:gsm.setState(GameStateManager.Level3);
 						break;
 					case 4:gsm.setState(GameStateManager.Level4);
-						break;
-					default:gsm.setState(GameStateManager.Level1);
 						break;
 					}
 				} catch (NumberFormatException e) {
@@ -154,13 +174,15 @@ public class LoadState extends GameState {
 					int stage = Integer.valueOf(br.readLine());
 					
 					switch(stage){
+					case 0:gsm.setState(GameStateManager.Level0);
+						break;
+					case 1:gsm.setState(GameStateManager.Level1);
+						break;
 					case 2: gsm.setState(GameStateManager.Level2);
 						break;
 					case 3:gsm.setState(GameStateManager.Level3);
 						break;
 					case 4:gsm.setState(GameStateManager.Level4);
-						break;
-					default:gsm.setState(GameStateManager.Level1);
 						break;
 					}
 					
@@ -188,14 +210,16 @@ public class LoadState extends GameState {
 					int stage = Integer.valueOf(br.readLine());
 					
 					switch(stage){
+					case 0:gsm.setState(GameStateManager.Level0);
+						break;
+					case 1:gsm.setState(GameStateManager.Level1);
+						break;
 					case 2: gsm.setState(GameStateManager.Level2);
-							break;
+						break;
 					case 3:gsm.setState(GameStateManager.Level3);
-							break;
+						break;
 					case 4:gsm.setState(GameStateManager.Level4);
-							break;
-					default:gsm.setState(GameStateManager.Level1);
-							break;
+						break;
 					}
 					
 					
