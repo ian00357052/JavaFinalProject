@@ -98,9 +98,8 @@ public class PlayState4 extends GameState {
 		// create player
 		
 		player = new Player(tileMap);
-		read(LoadState.getFileName(),player);
-		MyCharName = LoadState.getFileName();
-		player.setName(MyCharName);
+		read(Player.playerName,player);
+		MyCharName = Player.playerName;
 		player.setStage(3);
 		//read("0106",player);
 		// fill lists

@@ -95,11 +95,9 @@ public class PlayState2 extends GameState {
 		tileMap.loadTiles("/Tilesets/testtileset.gif");
 		tileMap.loadMap("/Maps/testmap2.map");	
 		// create player
-		MyCharName = LoadState.getFileName();
 		player = new Player(tileMap);
-		read(LoadState.getFileName(),player);
-		MyCharName = LoadState.getFileName();
-		player.setName(MyCharName);
+		read(Player.playerName,player);
+		MyCharName = Player.playerName;
 		player.setStage(1);
 		// fill lists
 		//populateDiamond();

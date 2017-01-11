@@ -98,6 +98,7 @@ public class PlayState extends GameState {
 				if (check==0) //if no same
 				{
 					MyCharName = tempName;
+					Player.playerName = MyCharName;
 					whileCheck=-1; //end while
 				}
 				if (check ==-1)//if same
@@ -122,7 +123,6 @@ public class PlayState extends GameState {
 		// create player
 		player = new Player(tileMap);
 		player.reset();
-		player.setName(MyCharName);
 		player.setStage(0);
 		// fill lists
 		//populateDiamond();
