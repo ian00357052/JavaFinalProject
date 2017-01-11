@@ -86,7 +86,6 @@ public class PlayState2 extends GameState {
 		}
 		
 	public void init() {
-		
 		// create lists
 		missile = new ArrayList<Missile>();
 		sparkles = new ArrayList<Sparkle>();

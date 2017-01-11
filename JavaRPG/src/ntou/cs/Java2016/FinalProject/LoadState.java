@@ -110,7 +110,7 @@ public class LoadState extends GameState {
 	}
 	
 	private void selectOption() {
-		
+		Player.playerName = options[currentOption];
 		if(currentOption == 0) {
 			setFileName(0);
 			FileReader fr;
@@ -189,13 +189,13 @@ public class LoadState extends GameState {
 					
 					switch(stage){
 					case 2: gsm.setState(GameStateManager.Level2);
-						break;
+							break;
 					case 3:gsm.setState(GameStateManager.Level3);
-						break;
+							break;
 					case 4:gsm.setState(GameStateManager.Level4);
-						break;
+							break;
 					default:gsm.setState(GameStateManager.Level1);
-						break;
+							break;
 					}
 					
 					
@@ -212,11 +212,10 @@ public class LoadState extends GameState {
 			}
 			
 		}
-		if(currentOption == 3) {
+		if(currentOption == 3) 
+		{
 			gsm.setState(GameStateManager.MENU);
 		}
-		
-		
 	}
 	
 }

@@ -48,7 +48,7 @@ public class Player extends Entity {
 	private int recoveryRate;//回復點數
 	private int speedPoint;//速度點數
 	private boolean shieldUsing;//使用護盾
-	private String playerName;//玩家名稱
+	public static String playerName;//玩家名稱
 	//道具控制
 	private boolean itemFlash;
 	private boolean itemRecovery;
